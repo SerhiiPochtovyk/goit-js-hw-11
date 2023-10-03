@@ -30,6 +30,7 @@ button {
   justify-content: center;
   gap: 10px;
   background-color: #c1bdc6;
+  cursor: pointer;
 }
 
 .search-form input[type='text'] {
@@ -39,7 +40,7 @@ button {
   border-radius: 6px;
   font-size: 16px;
   margin-right: 10px;
-}
+  }
 
 .gallery {
   display: grid;
