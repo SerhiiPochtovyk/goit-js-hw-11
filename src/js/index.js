@@ -24,7 +24,7 @@ function handleFetchError(error) {
     'Sorry, there are no images matching your search query. Please try again.',
     {
       position: 'center-center',
-      timeout: 5000,
+      timeout: 4000,
       width: '400px',
       fontSize: '24px',
     }
