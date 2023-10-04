@@ -61,7 +61,10 @@ async function handleSubmit(event) {
         captionDelay: 250,
       }).refresh();
       Notiflix.Notify.success(`Hooray! We found ${response.totalHits} images.`);
-      loadMoreBtn.classList.remove('is-hidden');
+
+      if (response.totalHits > perPage) {
+        loadMoreBtn.classList.remove('is-hidden');
+      }
     }
   } catch (error) {
     handleFetchError(error);
@@ -102,7 +105,6 @@ function createMarkup(images) {
 async function handleLoadMore() {
   currentPage += 1;
   simpleLightboxInstance.destroy();
-  loadMoreBtn.disabled = true;
 
   try {
     const response = await fetchImages(currentQuery, currentPage, perPage);
@@ -114,9 +116,11 @@ async function handleLoadMore() {
       captionDelay: 250,
     }).refresh();
 
+    const totalDisplayedImages =
+      gallery.querySelectorAll('.gallery__link').length;
     const totalPages = Math.ceil(response.totalHits / perPage);
 
-    if (currentPage < totalPages) {
+    if (totalDisplayedImages < response.totalHits) {
       loadMoreBtn.disabled = false;
       scrollToNextGalleryPage();
     } else {
